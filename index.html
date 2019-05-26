@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>个人社保计算器</title>
+		<style>
+			.dog{
+				margin: 0 auto;
+				text-align: center;
+			}
+			.mytable{
+				margin: 0 auto;
+				text-align: center;
+			}
+			.jz{
+				width=1000px; margin:0 auto;
+				text-align:center;
+				font-size:25px;
+				}
+		</style>
+		<style>
+	#web_bg{
+  			position:fixed;
+  			top: 0;
+  			left: 0;
+ 			width:100%;
+ 			height:100%;
+  			min-width: 1000px;
+  			z-index:-10;
+  			zoom: 1;
+  			background-color: #fff;
+  			background-repeat: no-repeat;
+  			background-size: cover;
+  			-webkit-background-size: cover;
+  			background-position: center 0;
+			}
+		</style>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="js/bootstrap.min.css"/>
+		<script>
+			function calc(){
+				//1.取得文本框里的工资
+				var salary=$("#sal").val();
+				if(!/^\d+$/.test(salary)) 
+				{
+					alert('工资必须是数字')
+					document.getElementById("sal").value="";
+				}
+				else
+				{//2.把工资字符串转成数字
+				var salNum=parseInt(salary);
+				//3.开始计算
+				var ylgr=salNum*0.08;
+				var ylgs=salNum*0.2;
+				var ygr=salNum*0.02;
+				var ygs=salNum*0.06;
+				var sygr=salNum*0.005;
+				var sygs=salNum*0.015;//失业公司
+				var gsgr=salNum*0.005;//工伤个人
+				var gsgs=salNum*0.015;//工伤公司
+				var sgr=salNum*0.005;//
+				var sgs=salNum*0.015;//
+				var gjjgr=salNum*0.12;//
+				var gjjgs=salNum*0.12;//
+				var grsum=ylgr+ygr+sygr+gsgr+sgr+gjjgr;
+				var gssum=ylgs+ygs+sygs+gsgs+sgs+gjjgs;
+				var sum=grsum+gssum;
+				//4.把结果放到单元格里
+				$("#ylgr").text(ylgr.toFixed(2));
+				$("#ylgs").text(ylgs.toFixed(2));
+				$("#ygr").text(ygr.toFixed(2));
+				$("#ygs").text(ygs.toFixed(2));
+				$("#sygr").text(sygr.toFixed(2));
+				$("#sygs").text(sygs.toFixed(2));
+				$("#gsgr").text(gsgr.toFixed(2));
+				$("#gsgs").text(gsgs.toFixed(2));
+				$("#sgr").text(sgr.toFixed(2));
+				$("#sgs").text(sgs.toFixed(2));
+				$("#gjjgr").text(gjjgr.toFixed(2));
+				$("#gjjgs").text(gjjgs.toFixed(2));
+				$("#grsum").text(grsum.toFixed(2));
+				$("#gssum").text(gssum.toFixed(2));
+				$("#sum").text(sum.toFixed(2));
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div class="jz" fonts>个人社保计算器</div>
+		<div class="dog" class="wrapper">		
+			<div id="web_bg" style="background-image: url(img/timg.jpg);"></div>
+			<img class="img-circle" src="img/u.jpg" width="150px" height="150px" />
+			<div class="mytable">
+				<table align="center" class="table table-bordered text-center">
+					<tr>
+						<td>工资</td>
+						<td colspan="3"><input placeholder="请输入个人工资"class="form-control" id="sal"></td>
+						<td><button onclick="calc()" class="btn btn-success btn-block">计算</button></td>
+						<tr class="btn-primary">
+							<td >险种</td>
+							<td >个人百分比</td>
+							<td >个人</td>
+							<td >公司百分比</td>
+							<td >公司</td>
+						</tr>
+						<tr>
+							<td >养老</td>
+							<td >8%</td>
+							<td id="ylgr"></td>
+							<td>20%</td>
+							<td id="ylgs"></td>
+						</tr>
+						<tr>
+							<td>医疗</td>
+							<td>2%</td>
+							<td id="ygr"></td>
+							<td>6%</td>
+							<td id="ygs"></td>
+						</tr>
+						<tr>
+							<td>失业</td>
+							<td>0.5%</td>
+							<td id="sygr"></td>
+							<td>1.5%</td>
+							<td id="sygs"></td>
+						</tr>
+						<tr>
+							<td>工伤</td>
+							<td>0.5%</td>
+							<td id="gsgr"></td>
+							<td>1.5%</td>
+							<td id="gsgs"></td>
+						</tr>
+						<tr>
+							<td>生育</td>
+							<td>0.5%</td>
+							<td id="sgr"></td>
+							<td>1.5%</td>
+							<td id="sgs"></td>
+						</tr>
+						<tr>
+							<td>公积金</td>
+							<td>12%</td>
+							<td id="gjjgr"></td>
+							<td>12%</td>
+							<td id="gjjgs"></td>
+						</tr>
+						<tr>
+							<td>合计</td>
+							<td>个人合计</td>
+							<td id="grsum"></td>
+							<td>公司合计</td>
+							<td id="gssum"></td>
+						</tr>
+						<tr>
+						<td>账户总额</td>
+						<td id="sum" colspan="4"> </td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</body>
+</html>
